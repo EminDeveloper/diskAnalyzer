@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -47,8 +49,14 @@ public class Starter extends Application {
 
     private void buildChart(String path){
         pieChart = new PieChart(pieChartData);
-
         refillChart(path);
+
+        Button button = new Button();
+        button.setOnAction(event -> refillChart(path));
+
+        BorderPane pane = new BorderPane();
+        pane.setTop(button);
+        pane.setCenter(pieChart);
 
         stage.setScene(new Scene(pieChart, 900, 600));
         stage.show();
