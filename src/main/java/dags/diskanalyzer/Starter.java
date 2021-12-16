@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ public class Starter extends Application {
     private Stage stage;
     private Map<String, Long> sizes;
     private ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+    private PieChart pieChart;
 
     public static void main(String[] args) {
          launch(args);
@@ -44,7 +46,7 @@ public class Starter extends Application {
     }
 
     private void buildChart(String path){
-        PieChart pieChart = new PieChart(pieChartData);
+        pieChart = new PieChart(pieChartData);
 
         refillChart(path);
 
@@ -65,5 +67,13 @@ public class Starter extends Application {
                         .map(entry -> new PieChart.Data(entry.getKey(), entry.getValue()))
                         .collect(Collectors.toList())
         );
+        pieChart.getData().forEach(data -> {
+            data
+                    .getNode()
+                    .addEventHandler(
+                            MouseEvent.MOUSE_PRESSED,
+                            event -> refillChart(data.getName())
+                    );
+        });
     }
 }
