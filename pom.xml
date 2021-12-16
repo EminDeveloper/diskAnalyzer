@@ -16,7 +16,7 @@
             <dependency>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-controls</artifactId>
-                <version>11</version>
+                <version>17</version>
             </dependency>
     </dependencies>
 
@@ -27,7 +27,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>HelloFX</mainClass>
+                    <mainClass>dags.diskanalyzer.Starter</mainClass>
                 </configuration>
             </plugin>
         </plugins>

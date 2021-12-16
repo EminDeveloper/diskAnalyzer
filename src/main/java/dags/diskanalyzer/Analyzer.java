@@ -24,7 +24,7 @@ public class Analyzer {
                         @Override
                         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                             long size = Files.size(file);
-                            updateDirSize(path, size);
+                            updateDirSize(file, size);
                             return FileVisitResult.CONTINUE;
                         }
 
@@ -44,5 +44,11 @@ public class Analyzer {
     private void updateDirSize(Path path, Long size){
         String key = path.toString();
         sizes.put(key, size + sizes.getOrDefault(key, 0L));
+
+        Path parent = path.getParent();
+
+        if(parent != null) {
+            updateDirSize(parent, size);
+        }
     }
 }
